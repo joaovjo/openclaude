@@ -109,6 +109,8 @@ export async function installOAuthTokens(tokens: OAuthTokens): Promise<void> {
   await clearAuthRelatedCaches()
 }
 
+import { readQwenCredentials } from '../../utils/qwenOAuth.js'
+
 export async function authLogin({
   email,
   sso,

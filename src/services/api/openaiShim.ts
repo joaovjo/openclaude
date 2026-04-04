@@ -1,3 +1,4 @@
+import { readQwenCredentials } from '../../utils/qwenOAuth.js'
 /**
  * OpenAI-compatible API shim for Claude Code.
  *
@@ -1120,6 +1121,13 @@ export function createOpenAIShimClient(options: {
 }): unknown {
   hydrateGeminiAccessTokenFromSecureStorage()
   hydrateGithubModelsTokenFromSecureStorage()
+
+
+
+  const qwenCreds = readQwenCredentials()
+  if (qwenCreds && qwenCreds.access_token && process.env.OPENAI_BASE_URL?.includes('portal.qwen.ai')) {
+    process.env.OPENAI_API_KEY ??= qwenCreds.access_token
+  }
 
   // When Gemini provider is active, map Gemini env vars to OpenAI-compatible ones
   // so the existing providerConfig.ts infrastructure picks them up correctly.

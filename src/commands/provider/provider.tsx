@@ -444,6 +444,11 @@ function ProviderChooser({
         'GPT-4o, DeepSeek, OpenRouter, Groq, LM Studio, and similar APIs',
     },
     {
+      label: 'Qwen OAuth',
+      value: 'qwen-oauth',
+      description: 'Log in using the Qwen Code saved credentials (free tier)',
+    },
+    {
       label: 'Gemini',
       value: 'gemini',
       description: 'Use Google Gemini with API key, access token, or local ADC',
@@ -939,6 +944,14 @@ export function ProviderWizard({
               setStep({ name: 'auto-goal' })
             } else if (value === 'ollama') {
               setStep({ name: 'ollama-detect' })
+            } else if (value === 'qwen-oauth') {
+              const env = {
+                CLAUDE_CODE_USE_OPENAI: '1',
+                OPENAI_BASE_URL: 'https://portal.qwen.ai/v1',
+                OPENAI_MODEL: 'qwen2.5-coder',
+                OPENAI_API_KEY: '',
+              }
+              onSave('qwen-oauth', env)
             } else if (value === 'openai') {
               setStep({
                 name: 'openai-key',

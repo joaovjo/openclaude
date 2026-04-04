@@ -7,6 +7,7 @@ import {
 import type { ModelOption } from './model/modelOptions.js'
 
 export type ProviderPreset =
+  | 'qwen-oauth'
   | 'anthropic'
   | 'ollama'
   | 'openai'
@@ -117,6 +118,15 @@ export function getProviderPresetDefaults(
   preset: ProviderPreset,
 ): ProviderPresetDefaults {
   switch (preset) {
+    case 'qwen-oauth':
+      return {
+        provider: 'openai',
+        name: 'Qwen OAuth',
+        baseUrl: 'https://portal.qwen.ai/v1',
+        model: 'qwen2.5-coder',
+        apiKey: '',
+        requiresApiKey: false, // The Qwen OAuth credential file provides the token
+      }
     case 'anthropic':
       return {
         provider: 'anthropic',
