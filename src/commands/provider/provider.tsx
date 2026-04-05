@@ -951,7 +951,7 @@ export function ProviderWizard({
                 OPENAI_MODEL: 'qwen2.5-coder',
                 OPENAI_API_KEY: '',
               }
-              onSave('qwen-oauth', env)
+              finishProfileSave(onDone, 'qwen-oauth', env)
             } else if (value === 'openai') {
               setStep({
                 name: 'openai-key',
